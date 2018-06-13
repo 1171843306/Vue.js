@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>TodoList</title>
+	<script src="vue.js"></script>
+</head>
+<body>
+	<div id="root">
+		<div>
+			<input v-model="inputValue" autofocus=true/>
+			<button @click="handleSubmit">提交</button>
+		</div>
+		<ul v-for="(item,index) of list" :key="index">
+			<li>{{item}}</li>
+	    </ul>
+	</div>
+
+	<script>
+		new Vue({
+			el:"#root",	
+			data:{
+				inputValue:'',
+				list:[]
+			},
+			methods:{
+				handleSubmit:function(){
+					this.list.push(this.inputValue)
+					this.inputValue = ''  //每次提交后清空
+				}
+			}
+		})
+	</script>
+</body>
+</html>

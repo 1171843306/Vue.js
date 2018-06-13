@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>TodoList组建拆分</title>
+	<script src="vue.js"></script>
+</head>
+<body>
+	<div id="root">
+		<div>
+			<input v-model="inputValue" autofocus=true/>
+			<button @click="handleSubmit">提交</button>
+		</div>
+		<ul>
+			<todo-item 
+			v-for="(item,index) of list" 
+			:key="index"
+			:content="item"
+			></todo-item>
+	    </ul>
+	</div>
+
+	<script>
+		Vue.component('todo-item',{
+			props:['content'],
+			template:'<li>{{content}}</li>'
+		})
+		new Vue({
+			el:"#root",	
+			data:{
+				inputValue:'',
+				list:[]
+			},
+			methods:{
+				handleSubmit:function(){
+					this.list.push(this.inputValue)
+					this.inputValue = ''  //每次提交后清空
+				}
+			}
+		})
+	</script>
+</body>
+</html>
