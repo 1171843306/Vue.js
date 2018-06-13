@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>v-if,v-show,v-for指令</title>
+	<script src="vue.js"></script>
+	
+</head>
+<body>
+	<div id="root">
+		<div v-if="show">hello world</div>
+		<div v-show="show">hello world</div>
+		<!-- 使用v-if时是直接把整个<div>给删除掉,而使用v-show时是给<div>里添加 style="display:none" 当需要多次显示时用v-show性能更好，如果只需要几次显隐用v-if效果会好-->
+		<button @click="handleClick">点我</button>
+
+		<ul v-for="(item,index) of list" :key="index">
+			<li>{{item}}</li>
+	    </ul>
+	    <!-- v-for的作用是当你有一个数据需要做循环展示的时候，它会帮助你把这个数据循环展示成一个li 标签;v-for="(item,index) of list" :key="index"这个意思是把数据list的值个item、下标给index、然后在把index给键值：key “注意每个:key都是不同的”；当然是用index作为key值也不是特别好的选择，如果需要对列表进行频繁的变更的时候... -->
+	</div>
+
+	<script>
+		new Vue({
+			el:"#root",	
+			data:{
+				show:true,
+				list:[1,2,3]
+			},
+			methods:{
+				handleClick:function(){
+					this.show=!this.show;
+				}
+			}
+		})
+	</script>
+</body></html>

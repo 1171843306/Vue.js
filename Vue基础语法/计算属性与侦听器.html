@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>计算属性与侦听器</title>
+	<script src="vue.js"></script>
+</head>
+<body>
+	
+	<div id="root">
+		姓：<input v-model="firstName" />
+	    名:<input v-model="lastName" />
+		<div>{{fullName}}</div>
+		<div>{{count}}</div>
+	</div>
+	<script>
+		new Vue({
+			el:"#root",
+			data:{
+				firstName:'',
+				lastName:'',
+				count:0
+			},
+			computed:{
+				// computed指的是一个属性通过其它属性计算而来的
+				// 它性能比较高只有当所依赖的属性发生变化时才重新计算
+				// 没有发生变化时就来利用之前的缓存显示
+				fullName:function(){
+					return this.firstName + ' '+ this.lastName
+				}
+			},
+			watch:{
+				// 侦听器是指数据我去监听某个数据的变化，一旦这个数据发生变换，我就可以在我的侦听器中做我的业务逻辑
+				firstName:function(){
+					this.count++
+				},
+				lastName:function(){
+					this.count++
+				}
+			}
+		})
+	</script>
+</body></html>
